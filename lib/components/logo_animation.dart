@@ -24,10 +24,10 @@ class LogoAnimation extends StatelessWidget {
           animatedTexts: [
             TyperAnimatedText(
               'RESAKA',
-              textStyle: GoogleFonts.roboto(
+              textStyle: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
-                color: const Color.fromARGB(255, 70, 50, 93),
+                color: Color.fromARGB(255, 70, 50, 93),
               ),
               speed: const Duration(milliseconds: 250),
             ),
