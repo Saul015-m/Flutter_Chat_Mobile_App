@@ -1,7 +1,7 @@
 import 'package:chat/components/button.dart';
 import 'package:chat/components/logo_animation.dart';
 import 'package:chat/components/text_input.dart';
-import 'package:chat/screens/login_screen.dart';
+import 'package:chat/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
