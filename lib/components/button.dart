@@ -5,13 +5,16 @@ class Button extends StatelessWidget {
   final double width;
   final double height;
   final void Function()? onTap;
+  final Widget? icon;
 
-  const Button(
-      {super.key,
-      required this.text,
-      required this.width,
-      required this.height,
-      required this.onTap});
+  const Button({
+    super.key,
+    required this.text,
+    required this.width,
+    required this.height,
+    required this.onTap,
+    this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +31,8 @@ class Button extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              if (icon != null) icon!,
+              const SizedBox(width: 8),
               Text(
                 text,
                 style: const TextStyle(color: Colors.white),

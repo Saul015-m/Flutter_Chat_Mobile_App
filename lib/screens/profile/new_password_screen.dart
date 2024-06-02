@@ -1,21 +1,18 @@
 import 'package:chat/components/button.dart';
-import 'package:chat/components/logo_animation.dart';
-import 'package:chat/components/profile_image.dart';
+import 'package:chat/components/chat_title.dart';
 import 'package:chat/components/text_input.dart';
-import 'package:chat/screens/auth/login_screen.dart';
-import 'package:chat/screens/home/navigation_screen.dart';
+import 'package:chat/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class NewPasswordScreen extends StatefulWidget {
+  const NewPasswordScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<NewPasswordScreen> createState() => _NewPasswordScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _NewPasswordScreenState extends State<NewPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -27,51 +24,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(25),
+        padding: const EdgeInsets.all(5),
         child: Column(
           children: [
-            // App Name and Back Button
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ),
-                      );
-                    },
+            ChatTitle(
+              title: 'Update Password',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfileScreen(),
                   ),
-                  const SizedBox(width: 20),
-                  const LogoAnimation(),
-                ],
-              ),
+                );
+              },
             ),
-            const SizedBox(height: 30),
-
-            // Register Form
+            const SizedBox(height: 20),
             Form(
               key: _formKey,
               child: Column(
                 children: [
-                  const ProfileImage(),
-                  const SizedBox(height: 40),
-
-                  TextInput(
-                    controller: _usernameController,
-                    labelText: 'Username',
-                    icon: Icons.person,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your username';
-                      }
-                      return null;
-                    },
-                  ),
                   const SizedBox(height: 20),
                   TextInput(
                     controller: _emailController,
@@ -141,12 +112,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(height: 20),
                   //Register Button
                   Button(
-                    text: 'Sign Up',
+                    text: 'Update',
                     width: 300,
                     height: 50,
                     onTap: () {
                       if (_formKey.currentState!.validate()) {}
-                      const NavigationScreen();
                     },
                   ),
                 ],

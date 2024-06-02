@@ -2,6 +2,7 @@ import 'package:chat/components/button.dart';
 import 'package:chat/components/logo_animation.dart';
 import 'package:chat/components/text_input.dart';
 import 'package:chat/screens/auth/register_screen.dart';
+import 'package:chat/screens/home/navigation_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -87,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 50,
                     onTap: () {
                       if (_formKey.currentState!.validate()) {}
+                      const NavigationScreen();
                     },
                   ),
                   Row(

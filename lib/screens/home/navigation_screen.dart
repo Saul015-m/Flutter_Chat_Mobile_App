@@ -1,7 +1,7 @@
-import 'package:chat/components/tab_item.dart';
-import 'package:chat/screens/discussion/group_screen.dart';
-import 'package:chat/screens/discussion/message_screen.dart';
+import 'package:chat/screens/auth/login_screen.dart';
+import 'package:chat/screens/home/discussion_screen.dart';
 import 'package:chat/screens/new/chat_screen.dart';
+import 'package:chat/screens/profile/profile_screen.dart';
 import 'package:chat/screens/user/user_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,20 @@ class _NavigationScreenState extends State<NavigationScreen> {
     if (_selectedIndex == 0) {
       return const TabBarTitle();
     } else {
-      return const Text('Users');
+      return const Row(
+        children: [
+          Spacer(),
+          Text(
+            'Users',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 70, 50, 93),
+            ),
+          ),
+          Spacer(),
+        ],
+      );
     }
   }
 
@@ -37,34 +50,45 @@ class _NavigationScreenState extends State<NavigationScreen> {
         appBar: AppBar(
           leading: Builder(
             builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
+              return Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.density_small_rounded,
+                    color: Color.fromARGB(255, 70, 50, 93),
+                  ),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                ),
               );
             },
           ),
           actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: () {
-                // Log out action
-              },
+            Padding(
+              padding: const EdgeInsets.only(right: 30),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.logout,
+                  color: Color.fromARGB(255, 70, 50, 93),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
           title: _buildAppBarTitle(),
         ),
         drawer: Drawer(
           child: ListView(
-            padding: EdgeInsets.zero,
+            padding: const EdgeInsets.only(top: 60),
             children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Text('Drawer Header'),
-              ),
               ListTile(
                 title: const Text('Discussions'),
                 onTap: () {
@@ -75,8 +99,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
               ListTile(
                 title: const Text('Profile'),
                 onTap: () {
-                  Navigator.pop(context);
-                  _onItemTapped(1);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfileScreen(),
+                    ),
+                  );
                 },
               ),
             ],
@@ -119,59 +147,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
-    );
-  }
-}
-
-class TabBarTitle extends StatelessWidget {
-  const TabBarTitle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      child: Row(
-        children: [
-          const SizedBox(width: 10),
-          Expanded(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
-              child: Container(
-                height: 40,
-                color: const Color.fromRGBO(235, 224, 255, 1.0),
-                child: const TabBar(
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  indicator: BoxDecoration(
-                    color: Color.fromARGB(255, 70, 50, 93),
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  dividerColor: Colors.transparent,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: Color.fromARGB(255, 70, 50, 93),
-                  tabs: [
-                    TabItem(title: "Message"),
-                    TabItem(title: "Group"),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class TabBarViewContent extends StatelessWidget {
-  const TabBarViewContent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const TabBarView(
-      children: [
-        MessageScreen(),
-        GroupScreen(),
-      ],
     );
   }
 }
